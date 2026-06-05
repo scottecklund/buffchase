@@ -1,1 +1,1492 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a0a">
+<title>Lean Mass Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --black:#0a0a0a;
+  --off:#111;
+  --dark:#1a1a1a;
+  --card:#1e1e1e;
+  --b1:#252525;
+  --b2:#333;
+  --red:#e8002d;
+  --white:#f5f0eb;
+  --muted:#777;
+  --dim:#555;
+  --amber:#f59e0b;
+  --blue:#3b82f6;
+  --green:#10b981;
+  --safe:env(safe-area-inset-bottom,0px);
+}
+html{scroll-behavior:smooth;background:var(--black);}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Barlow',sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  overflow-x:hidden;
+  /* bottom nav padding */
+  padding-bottom:calc(64px + var(--safe));
+}
+
+/* ─── TYPOGRAPHY ─── */
+.disp{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;}
+.cond{font-family:'Barlow Condensed',sans-serif;}
+
+/* ─── TOP HEADER ─── */
+.top-bar{
+  position:sticky;top:0;z-index:200;
+  background:var(--black);
+  border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+  height:52px;
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+.brand{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:.08em;
+  color:var(--white);
+  display:flex;align-items:center;gap:8px;
+}
+.brand-dot{width:7px;height:7px;background:var(--red);border-radius:1px;flex-shrink:0;}
+.vol-pill{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:var(--red);border:1px solid var(--red);
+  padding:3px 8px;
+}
+
+/* ─── BOTTOM TAB NAV ─── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  z-index:200;
+  background:var(--off);
+  border-top:1px solid var(--b1);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  padding-bottom:var(--safe);
+}
+.nav-btn{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:4px;
+  padding:10px 0 8px;
+  background:none;border:none;
+  cursor:pointer;
+  position:relative;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-btn::before{
+  content:'';
+  position:absolute;top:0;left:16px;right:16px;
+  height:2px;background:var(--red);
+  transform:scaleX(0);
+  transition:transform .2s;
+  border-radius:0 0 2px 2px;
+}
+.nav-btn.active::before{transform:scaleX(1);}
+.nav-icon{
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-icon svg{width:20px;height:20px;transition:stroke .2s;}
+.nav-btn .nav-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dim);
+  transition:color .2s;
+}
+.nav-btn.active .nav-label{color:var(--red);}
+.nav-btn.active .nav-icon svg{stroke:var(--red);}
+
+/* ─── TAB PANELS ─── */
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fadeUp .2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── SECTION HERO ─── */
+.s-hero{
+  background:var(--off);
+  padding:20px 16px 18px;
+  border-bottom:1px solid var(--b1);
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:12px;
+}
+.s-eye{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.35em;text-transform:uppercase;
+  color:var(--red);margin-bottom:6px;
+  display:flex;align-items:center;gap:8px;
+}
+.s-eye::before{content:'';width:16px;height:2px;background:var(--red);}
+.s-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42px;letter-spacing:.03em;line-height:.92;
+  color:var(--white);
+}
+.s-sub{font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px;}
+.s-stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:52px;color:var(--red);line-height:1;
+  flex-shrink:0;text-align:right;
+}
+.s-stat-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-top:2px;text-align:right;
+}
+
+/* ══════════════════════════
+   TAB 1 — GROCERY
+══════════════════════════ */
+.g-summary{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--b1);
+  margin:12px 12px 0;
+}
+.g-sum-cell{
+  background:var(--dark);
+  padding:12px 14px;
+}
+.g-sum-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px;color:var(--red);line-height:1;
+}
+.g-sum-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-top:2px;
+}
+
+.g-cat{margin:16px 12px 0;}
+.g-cat:last-child{margin-bottom:16px;}
+.g-cat-hdr{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;
+  background:var(--off);
+  border:1px solid var(--b1);
+  border-bottom:none;
+}
+.g-cat-icon{
+  width:28px;height:28px;background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.g-cat-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.15em;
+  color:var(--white);
+}
+.g-cat-count{
+  margin-left:auto;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;color:var(--dim);
+}
+.g-items{list-style:none;border:1px solid var(--b1);}
+.g-item{
+  display:flex;align-items:flex-start;
+  gap:12px;
+  padding:13px 14px;
+  border-bottom:1px solid var(--b1);
+  background:var(--dark);
+  cursor:pointer;
+  transition:background .15s;
+  -webkit-tap-highlight-color:transparent;
+  min-height:56px;
+}
+.g-item:last-child{border-bottom:none;}
+.g-item:active{background:var(--card);}
+.g-check{
+  width:22px;height:22px;
+  border:1.5px solid var(--dim);
+  flex-shrink:0;margin-top:2px;
+  position:relative;
+  transition:background .15s,border-color .15s;
+}
+.g-item.checked .g-check{background:var(--red);border-color:var(--red);}
+.g-item.checked .g-check::after{
+  content:'';position:absolute;
+  left:5px;top:3px;
+  width:9px;height:5px;
+  border-left:2px solid white;border-bottom:2px solid white;
+  transform:rotate(-45deg);
+}
+.g-item.checked .g-name{text-decoration:line-through;color:var(--dim);}
+.g-body{flex:1;min-width:0;}
+.g-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.04em;
+  color:var(--white);line-height:1.2;
+  transition:color .15s;
+}
+.g-note{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4;}
+.g-right{
+  display:flex;flex-direction:column;
+  align-items:flex-end;gap:4px;flex-shrink:0;
+}
+.g-amt{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  color:var(--muted);white-space:nowrap;
+}
+.g-badge{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  padding:2px 7px;
+}
+.g-badge.req{background:var(--red);color:white;}
+.g-badge.opt{border:1px solid var(--b2);color:var(--dim);}
+
+/* ══════════════════════════
+   TAB 2 — WORKOUT
+══════════════════════════ */
+/* Horizontal scroll day strip */
+.day-strip-wrap{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  border-bottom:1px solid var(--b1);
+  background:var(--off);
+}
+.day-strip-wrap::-webkit-scrollbar{display:none;}
+.day-strip{
+  display:flex;
+  width:max-content;
+  min-width:100%;
+}
+.day-btn{
+  flex:0 0 auto;
+  width:calc((100vw - 1px) / 4);
+  min-width:80px;
+  padding:10px 8px;
+  text-align:center;
+  background:none;border:none;
+  cursor:pointer;
+  position:relative;
+  border-right:1px solid var(--b1);
+  transition:background .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.day-btn::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;
+  height:3px;background:var(--red);
+  transform:scaleX(0);transition:transform .2s;
+}
+.day-btn.active::after{transform:scaleX(1);}
+.day-btn.active{background:rgba(232,0,45,.06);}
+.day-btn.anchor{border-top:3px solid #ffd700;}
+.d-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;letter-spacing:.04em;
+  color:var(--white);display:block;line-height:1;
+}
+.d-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dim);margin-top:3px;display:block;
+}
+.d-tag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--red);margin-top:2px;display:block;
+}
+.day-btn.rest-day .d-name,.day-btn.rest-day .d-label,.day-btn.rest-day .d-tag{opacity:.45;}
+
+.wo-panel{display:none;}
+.wo-panel.active{display:block;}
+
+.wo-hdr{
+  padding:16px;
+  background:var(--off);
+  border-bottom:1px solid var(--b1);
+}
+.wo-eye{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--red);margin-bottom:4px;
+}
+.wo-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:38px;letter-spacing:.03em;line-height:1;
+  color:var(--white);
+}
+.wo-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.chip{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  padding:4px 10px;
+  border:1px solid var(--b2);
+  color:var(--muted);
+}
+.chip.primary{background:var(--red);border-color:var(--red);color:white;}
+.wo-meta-row{
+  display:flex;gap:0;
+  border:1px solid var(--b1);
+  margin:12px 12px 0;
+}
+.wo-meta-cell{
+  flex:1;padding:10px 12px;
+  border-right:1px solid var(--b1);
+  text-align:center;
+}
+.wo-meta-cell:last-child{border-right:none;}
+.wo-meta-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;color:var(--white);line-height:1;
+}
+.wo-meta-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);margin-top:2px;
+}
+
+.ex-list{padding:12px;display:flex;flex-direction:column;gap:10px;}
+.ex-card{
+  background:var(--dark);
+  border:1px solid var(--b1);
+  border-radius:2px;
+  overflow:hidden;
+}
+.ex-card-hdr{
+  display:flex;align-items:flex-start;
+  gap:12px;padding:14px;
+  border-bottom:1px solid var(--b1);
+}
+.ex-n{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42px;color:var(--b2);line-height:1;
+  flex-shrink:0;width:36px;
+  transition:color .2s;
+}
+.ex-card:active .ex-n{color:var(--red);}
+.ex-info{flex:1;min-width:0;}
+.ex-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;
+  color:var(--white);line-height:1.2;
+}
+.ex-muscle{
+  display:inline-block;
+  background:rgba(232,0,45,.1);color:var(--red);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  padding:2px 7px;margin-top:5px;
+}
+.ex-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--b1);
+}
+.ex-stat{
+  padding:10px 12px;
+  border-right:1px solid var(--b1);
+  text-align:center;
+}
+.ex-stat:last-child{border-right:none;}
+.ex-stat-val{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;color:var(--white);line-height:1;
+}
+.ex-stat-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-top:2px;
+}
+.ex-desc{
+  padding:0 14px 14px;
+  font-size:13px;color:var(--muted);
+  line-height:1.6;
+}
+
+/* Rest day */
+.rest-card{
+  margin:12px;
+  background:var(--dark);
+  border:1px solid var(--b1);
+  padding:28px 20px;
+  text-align:center;
+}
+.rest-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:48px;letter-spacing:.03em;
+  color:var(--white);margin:12px 0 6px;
+}
+.rest-sub{font-size:13px;color:var(--muted);line-height:1.6;max-width:280px;margin:0 auto;}
+.rest-chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+  justify-content:center;margin-top:18px;
+}
+.rest-chip{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 12px;
+  border:1px solid var(--b2);color:var(--muted);
+}
+
+/* ══════════════════════════
+   TAB 3 — MEALS
+══════════════════════════ */
+.meal-type-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--off);
+  border-bottom:1px solid var(--b1);
+}
+.mtype-btn{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dim);
+  background:none;border:none;
+  padding:12px 6px;
+  cursor:pointer;
+  position:relative;
+  -webkit-tap-highlight-color:transparent;
+  transition:color .2s;
+  text-align:center;
+  line-height:1.3;
+}
+.mtype-btn.active{color:var(--white);}
+.mtype-btn::after{
+  content:'';position:absolute;
+  bottom:0;left:8px;right:8px;
+  height:2px;background:var(--red);
+  transform:scaleX(0);transition:transform .2s;
+}
+.mtype-btn.active::after{transform:scaleX(1);}
+
+.mpanel{display:none;}
+.mpanel.active{display:block;}
+
+/* Macro summary */
+.macro-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--b1);
+  margin:12px 12px 0;
+}
+.macro-cell{
+  background:var(--dark);
+  padding:12px 8px;text-align:center;
+}
+.macro-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;line-height:1;
+}
+.macro-num.cal{color:var(--amber);}
+.macro-num.pro{color:var(--red);}
+.macro-num.carb{color:var(--blue);}
+.macro-num.fat{color:var(--green);}
+.macro-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-top:3px;
+}
+
+/* Progress bars */
+.prog-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--b1);
+  margin:8px 12px 0;
+}
+.prog-cell{background:var(--dark);padding:10px 12px;}
+.prog-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:6px;
+}
+.prog-track{height:4px;background:var(--b2);margin-bottom:4px;}
+.prog-fill{height:100%;}
+.prog-fill.cal{background:var(--amber);}
+.prog-fill.pro{background:var(--red);}
+.prog-fill.carb{background:var(--blue);}
+.prog-fill.fat{background:var(--green);}
+.prog-vals{
+  display:flex;justify-content:space-between;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+}
+.prog-cur{color:var(--white);}
+.prog-tgt{color:var(--dim);}
+
+/* Meal timeline */
+.meal-timeline{
+  padding:12px;
+  display:flex;flex-direction:column;
+  gap:10px;
+}
+
+.meal-block{
+  background:var(--dark);
+  border:1px solid var(--b1);
+  border-radius:2px;
+  overflow:hidden;
+}
+.meal-block-hdr{
+  display:flex;align-items:center;
+  gap:0;
+  border-bottom:1px solid var(--b1);
+}
+.meal-time-block{
+  padding:12px 14px;
+  border-right:1px solid var(--b1);
+  text-align:center;
+  min-width:68px;
+  flex-shrink:0;
+}
+.meal-time{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;color:var(--red);line-height:1;
+}
+.meal-ampm{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);
+}
+.meal-period{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dim);margin-top:2px;
+}
+.meal-title-block{padding:12px 14px;flex:1;}
+.meal-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;
+  color:var(--white);line-height:1.2;
+}
+.meal-totals{
+  display:flex;flex-wrap:wrap;gap:5px;
+  margin-top:6px;
+}
+.m-pill{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 7px;
+  border:1px solid var(--b2);color:var(--muted);
+}
+.m-pill.cal{border-color:var(--amber);color:var(--amber);}
+.m-pill.pro{border-color:var(--red);color:var(--red);}
+.m-pill.carb{border-color:var(--blue);color:var(--blue);}
+.m-pill.fat{border-color:var(--green);color:var(--green);}
+
+/* food items */
+.fi-list{border-top:1px solid var(--b1);}
+.fi-row{
+  display:flex;align-items:flex-start;
+  gap:10px;
+  padding:10px 14px;
+  border-bottom:1px solid var(--b1);
+}
+.fi-row:last-child{border-bottom:none;}
+.fi-dot{
+  width:5px;height:5px;
+  background:var(--red);
+  flex-shrink:0;margin-top:6px;
+}
+.fi-body{flex:1;min-width:0;}
+.fi-name{font-size:14px;color:var(--white);font-weight:500;line-height:1.3;}
+.fi-sub{font-size:12px;color:var(--muted);margin-top:1px;}
+.fi-nums{
+  display:flex;flex-direction:column;
+  align-items:flex-end;gap:2px;
+  flex-shrink:0;
+}
+.fi-cal{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:700;
+  color:var(--amber);
+}
+.fi-pro{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  color:var(--red);
+}
+.meal-note{
+  font-size:12px;color:var(--muted);
+  padding:10px 14px;
+  border-top:1px solid var(--b1);
+  border-left:2px solid var(--b2);
+  margin-left:12px;
+  margin-right:12px;
+  margin-bottom:12px;
+  line-height:1.55;
+}
+
+.ex-video{
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;
+  padding:11px 14px;
+  border-top:1px solid var(--b1);
+  background:rgba(232,0,45,.06);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--red);
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .15s;
+}
+.ex-video:active{background:rgba(232,0,45,.16);}
+.ex-video svg{width:16px;height:16px;flex-shrink:0;}
+.video-credit{
+  display:flex;align-items:center;gap:8px;
+  margin:0 12px 12px;
+  padding:10px 14px;
+  background:var(--dark);
+  border:1px solid var(--b1);
+  border-left:2px solid var(--red);
+}
+.video-credit svg{width:18px;height:18px;flex-shrink:0;color:var(--red);}
+.video-credit-txt{font-size:12px;color:var(--muted);line-height:1.5;}
+.video-credit-txt b{color:var(--white);font-weight:500;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="top-bar">
+  <div class="brand"><div class="brand-dot"></div>LEAN MASS PLAYBOOK</div>
+  <div class="vol-pill">VOL 01</div>
+</header>
+
+<!-- ══════════════════════════════════
+     TAB 1 — GROCERY LIST
+══════════════════════════════════ -->
+<div id="tab-grocery" class="tab-panel">
+
+  <div class="s-hero">
+    <div>
+      <div class="s-eye">Costco Shopping</div>
+      <div class="s-title">GROCERY<br>LIST</div>
+      <div class="s-sub">Tap items to check them off as you shop.</div>
+    </div>
+    <div>
+      <div class="s-stat-num">12</div>
+      <div class="s-stat-lbl">Items</div>
+    </div>
+  </div>
+
+  <div class="g-summary">
+    <div class="g-sum-cell"><div class="g-sum-num">9</div><div class="g-sum-lbl">Required</div></div>
+    <div class="g-sum-cell"><div class="g-sum-num">3</div><div class="g-sum-lbl">Optional</div></div>
+    <div class="g-sum-cell"><div class="g-sum-num">~$180</div><div class="g-sum-lbl">Est. Weekly</div></div>
+    <div class="g-sum-cell"><div class="g-sum-num">2+</div><div class="g-sum-lbl">Wks Supply</div></div>
+  </div>
+
+  <!-- PROTEIN -->
+  <div class="g-cat">
+    <div class="g-cat-hdr">
+      <div class="g-cat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" fill="white"/></svg></div>
+      <div class="g-cat-name">Protein Sources</div>
+      <div class="g-cat-count">6</div>
+    </div>
+    <ul class="g-items">
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Fairlife Nutrition Plan Shakes</div><div class="g-note">30g protein · 150 cal · Core daily shake</div></div>
+        <div class="g-right"><div class="g-amt">12-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Kirkland Sous Vide Egg Bites</div><div class="g-note">12g protein · 2-pack · Bacon & Gruyère</div></div>
+        <div class="g-right"><div class="g-amt">10-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Oikos Triple Zero Greek Yogurt</div><div class="g-note">15g protein · 0 fat · 0 added sugar</div></div>
+        <div class="g-right"><div class="g-amt">12-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Kirkland Sliced Turkey Breast</div><div class="g-note">24g protein per 4 oz · Low fat, lean</div></div>
+        <div class="g-right"><div class="g-amt">2 lb pack</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Kirkland Rotisserie Chicken Chunks</div><div class="g-note">26g protein per serving · Ready-to-eat</div></div>
+        <div class="g-right"><div class="g-amt">2 × 4 lb</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Kirkland Sirloin Burger Patties</div><div class="g-note">28g protein each · Pre-formed, grill-ready</div></div>
+        <div class="g-right"><div class="g-amt">6-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CARBS -->
+  <div class="g-cat">
+    <div class="g-cat-hdr">
+      <div class="g-cat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="4" width="10" height="7" rx="2" fill="white"/><rect x="4" y="2" width="6" height="4" rx="1" fill="rgba(255,255,255,.6)"/></svg></div>
+      <div class="g-cat-name">Carbohydrates</div>
+      <div class="g-cat-count">2</div>
+    </div>
+    <ul class="g-items">
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Bibigo Cooked White Rice Bowls</div><div class="g-note">74g carbs · 380 cal · 2-min microwave</div></div>
+        <div class="g-right"><div class="g-amt">12-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Everything Bagels</div><div class="g-note">52g carbs · 270 cal · Daily breakfast base</div></div>
+        <div class="g-right"><div class="g-amt">6-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- FATS & ADD-ONS -->
+  <div class="g-cat">
+    <div class="g-cat-hdr">
+      <div class="g-cat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" fill="white"/><circle cx="7" cy="7" r="2.5" fill="rgba(0,0,0,.3)"/></svg></div>
+      <div class="g-cat-name">Fats &amp; Add-Ons</div>
+      <div class="g-cat-count">2</div>
+    </div>
+    <ul class="g-items">
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Kirkland Natural Peanut Butter</div><div class="g-note">8g protein + 16g fat per 2 tbsp · Calorie dense</div></div>
+        <div class="g-right"><div class="g-amt">2-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Kirkland Sliced Cheddar Cheese</div><div class="g-note">7g protein + 9g fat per slice</div></div>
+        <div class="g-right"><div class="g-amt">2 lb pack</div><div class="g-badge req">Required</div></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SUPPLEMENTS -->
+  <div class="g-cat">
+    <div class="g-cat-hdr">
+      <div class="g-cat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L3 5v4a4 4 0 008 0V5L7 1z" fill="white"/></svg></div>
+      <div class="g-cat-name">Supplements &amp; Hydration</div>
+      <div class="g-cat-count">3</div>
+    </div>
+    <ul class="g-items">
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Creatine Monohydrate</div><div class="g-note">5g daily · Non-negotiable · Every single day</div></div>
+        <div class="g-right"><div class="g-amt">500g tub</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Liquid I.V. Hydration Multiplier</div><div class="g-note">Electrolytes + B vitamins · Workout days</div></div>
+        <div class="g-right"><div class="g-amt">30-pack</div><div class="g-badge req">Required</div></div>
+      </li>
+      <li class="g-item" onclick="toggleG(this)">
+        <div class="g-check"></div>
+        <div class="g-body"><div class="g-name">Kirkland Protein Bars</div><div class="g-note">21g protein · 190 cal · Chocolate chip cookie dough</div></div>
+        <div class="g-right"><div class="g-amt">20-count</div><div class="g-badge req">Required</div></div>
+      </li>
+    </ul>
+  </div>
+
+</div><!-- end grocery tab -->
+
+
+<!-- ══════════════════════════════════
+     TAB 2 — WORKOUT
+══════════════════════════════════ -->
+<div id="tab-workout" class="tab-panel">
+
+  <div class="s-hero">
+    <div>
+      <div class="s-eye">Training Protocol</div>
+      <div class="s-title">WEEKLY<br>SCHEDULE</div>
+      <div class="s-sub">4 training days. Never miss Monday.</div>
+    </div>
+    <div>
+      <div class="s-stat-num">4</div>
+      <div class="s-stat-lbl">Days/Wk</div>
+    </div>
+  </div>
+
+  <div class="day-strip-wrap">
+    <div class="day-strip" id="day-strip">
+      <button class="day-btn anchor active" data-day="mon"><span class="d-name">MON</span><span class="d-label">Day 1</span><span class="d-tag">PUSH</span></button>
+      <button class="day-btn" data-day="tue"><span class="d-name">TUE</span><span class="d-label">Day 2</span><span class="d-tag">PULL</span></button>
+      <button class="day-btn rest-day" data-day="wed"><span class="d-name">WED</span><span class="d-label">Day 3</span><span class="d-tag">REST</span></button>
+      <button class="day-btn" data-day="thu"><span class="d-name">THU</span><span class="d-label">Day 4</span><span class="d-tag">LEGS</span></button>
+      <button class="day-btn rest-day" data-day="fri"><span class="d-name">FRI</span><span class="d-label">Day 5</span><span class="d-tag">REST</span></button>
+      <button class="day-btn" data-day="sat"><span class="d-name">SAT</span><span class="d-label">Day 6</span><span class="d-tag">FULL</span></button>
+      <button class="day-btn rest-day" data-day="sun"><span class="d-name">SUN</span><span class="d-label">Day 7</span><span class="d-tag">REST</span></button>
+    </div>
+  </div>
+
+  <!-- MON — Push -->
+  <div id="day-mon" class="wo-panel active">
+    <div class="wo-hdr">
+      <div class="wo-eye">Monday · Day 1 · Anchor Day</div>
+      <div class="wo-title">PUSH DAY</div>
+      <div class="wo-chips">
+        <span class="chip primary">Chest</span><span class="chip primary">Shoulders</span><span class="chip primary">Triceps</span>
+      </div>
+    </div>
+    <div class="wo-meta-row">
+      <div class="wo-meta-cell"><div class="wo-meta-num">60<span style="font-size:14px;color:var(--muted)">min</span></div><div class="wo-meta-lbl">Duration</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">17</div><div class="wo-meta-lbl">Sets</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">5</div><div class="wo-meta-lbl">Exercises</div></div>
+    </div>
+    <div class="video-credit">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.5-.5-5.2a3 3 0 00-2.1-2.1C18.7 4 12 4 12 4s-6.7 0-8.4.7A3 3 0 001.5 6.8C1 8.5 1 12 1 12s0 3.5.5 5.2a3 3 0 002.1 2.1c1.7.7 8.4.7 8.4.7s6.7 0 8.4-.7a3 3 0 002.1-2.1C23 15.5 23 12 23 12zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      <div class="video-credit-txt">Form videos by <b>Jeff Nippard</b> — science-based bodybuilder &amp; powerlifter. Every link goes to one of his technique tutorials. Tap to watch.</div>
+    </div>
+    <div class="ex-list">
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">01</div><div class="ex-info"><div class="ex-name">Barbell Bench Press</div><span class="ex-muscle">Chest · Front Delt · Triceps</span></div></div>
+        <div class="ex-stats">
+          <div class="ex-stat"><div class="ex-stat-val">4</div><div class="ex-stat-lbl">Sets</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">6–10</div><div class="ex-stat-lbl">Reps</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div>
+        </div>
+        <div class="ex-desc">Primary mass builder. 2-sec descent, explosive up. Full ROM. Use a spotter. Add 2.5–5 lbs per week.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=hWbUlkb5Ms4" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">02</div><div class="ex-info"><div class="ex-name">Overhead Press (Standing)</div><span class="ex-muscle">Shoulders · Triceps · Core</span></div></div>
+        <div class="ex-stats">
+          <div class="ex-stat"><div class="ex-stat-val">4</div><div class="ex-stat-lbl">Sets</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">6–10</div><div class="ex-stat-lbl">Reps</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div>
+        </div>
+        <div class="ex-desc">Standing preferred — engages more stabilizers. Brace abs, avoid excess back arch. Full lockout at top.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=_RlRDWO2jfg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">03</div><div class="ex-info"><div class="ex-name">Incline Dumbbell Press</div><span class="ex-muscle">Upper Chest · Front Delt</span></div></div>
+        <div class="ex-stats">
+          <div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">8–12</div><div class="ex-stat-lbl">Reps</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">90s</div><div class="ex-stat-lbl">Rest</div></div>
+        </div>
+        <div class="ex-desc">30–45° incline. Builds the upper chest that creates a full, rounded look. Don't go too steep.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+incline+dumbbell+press+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">04</div><div class="ex-info"><div class="ex-name">Dips</div><span class="ex-muscle">Triceps · Lower Chest</span></div></div>
+        <div class="ex-stats">
+          <div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">8–15</div><div class="ex-stat-lbl">Reps</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">90s</div><div class="ex-stat-lbl">Rest</div></div>
+        </div>
+        <div class="ex-desc">Lean forward for chest, stay upright for triceps. Add a weight belt once bodyweight is easy for 15+ reps.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+dips+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">05</div><div class="ex-info"><div class="ex-name">Lateral Raises</div><span class="ex-muscle">Side Deltoid</span></div></div>
+        <div class="ex-stats">
+          <div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">12–15</div><div class="ex-stat-lbl">Reps</div></div>
+          <div class="ex-stat"><div class="ex-stat-val">60s</div><div class="ex-stat-lbl">Rest</div></div>
+        </div>
+        <div class="ex-desc">Light weight, strict form. Raise to shoulder height, slight elbow bend. Widens shoulders, builds the V-taper.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+lateral+raise+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUE — Pull -->
+  <div id="day-tue" class="wo-panel">
+    <div class="wo-hdr">
+      <div class="wo-eye">Tuesday · Day 2</div>
+      <div class="wo-title">PULL DAY</div>
+      <div class="wo-chips"><span class="chip primary">Back Width</span><span class="chip primary">Back Thickness</span><span class="chip">Biceps</span></div>
+    </div>
+    <div class="wo-meta-row">
+      <div class="wo-meta-cell"><div class="wo-meta-num">60<span style="font-size:14px;color:var(--muted)">min</span></div><div class="wo-meta-lbl">Duration</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">16</div><div class="wo-meta-lbl">Sets</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">5</div><div class="wo-meta-lbl">Exercises</div></div>
+    </div>
+    <div class="video-credit">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.5-.5-5.2a3 3 0 00-2.1-2.1C18.7 4 12 4 12 4s-6.7 0-8.4.7A3 3 0 001.5 6.8C1 8.5 1 12 1 12s0 3.5.5 5.2a3 3 0 002.1 2.1c1.7.7 8.4.7 8.4.7s6.7 0 8.4-.7a3 3 0 002.1-2.1C23 15.5 23 12 23 12zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      <div class="video-credit-txt">Form videos by <b>Jeff Nippard</b> — science-based bodybuilder &amp; powerlifter. Every link goes to one of his technique tutorials. Tap to watch.</div>
+    </div>
+    <div class="ex-list">
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">01</div><div class="ex-info"><div class="ex-name">Pull-Ups / Lat Pulldown</div><span class="ex-muscle">Lats · Biceps · Rear Delt</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">4</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">6–12</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Bodyweight pull-ups if you can do 8+. Otherwise lat pulldown. Pull to chest, full stretch at top. Back width is built here.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=DXL18E7QRbk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">02</div><div class="ex-info"><div class="ex-name">Barbell Bent-Over Row</div><span class="ex-muscle">Mid Back · Rhomboids · Biceps</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">4</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">6–10</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Hinge to 45°, pull bar to lower chest. Squeeze shoulder blades at top. Builds back thickness. Keep spine neutral.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=DXL18E7QRbk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">03</div><div class="ex-info"><div class="ex-name">Seated Cable Row</div><span class="ex-muscle">Mid Back · Lats</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">10–12</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">90s</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Full stretch on every rep. Pull to lower abs, elbows tucked. Great for progressive loading.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=DXL18E7QRbk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">04</div><div class="ex-info"><div class="ex-name">Barbell or Dumbbell Curl</div><span class="ex-muscle">Biceps · Brachialis</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">10–15</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">60s</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Full ROM. Squeeze at top, control the negative. Supinate at the top for peak contraction. Don't cheat.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=GNO4OtYoCYk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">05</div><div class="ex-info"><div class="ex-name">Face Pulls</div><span class="ex-muscle">Rear Delt · Rotator Cuff</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">15–20</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">60s</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Cable at eye height. Pull to face, elbows high. Keeps shoulders healthy. Critical with heavy pressing volume.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=DXL18E7QRbk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WED — Rest -->
+  <div id="day-wed" class="wo-panel">
+    <div class="rest-card">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M8 26c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#555" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M5 26h30" stroke="#555" stroke-width="2" stroke-linecap="round"/><path d="M20 8V5M10.5 10.5L8.5 8.5M29.5 10.5L31.5 8.5" stroke="#555" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rest-title">REST DAY</div>
+      <p class="rest-sub">Wednesday · Recovery is where muscle is built. Eat, sleep 8+ hours, hydrate to 100 oz. Take your creatine.</p>
+      <div class="rest-chips"><span class="rest-chip">Walk 20–30 min</span><span class="rest-chip">Sleep 8+ hrs</span><span class="rest-chip">100 oz water</span><span class="rest-chip">Take creatine</span><span class="rest-chip">Eat all meals</span></div>
+    </div>
+  </div>
+
+  <!-- THU — Legs -->
+  <div id="day-thu" class="wo-panel">
+    <div class="wo-hdr">
+      <div class="wo-eye">Thursday · Day 4</div>
+      <div class="wo-title">LEG DAY</div>
+      <div class="wo-chips"><span class="chip primary">Quads</span><span class="chip primary">Glutes</span><span class="chip primary">Hamstrings</span><span class="chip">Calves</span></div>
+    </div>
+    <div class="wo-meta-row">
+      <div class="wo-meta-cell"><div class="wo-meta-num">75<span style="font-size:14px;color:var(--muted)">min</span></div><div class="wo-meta-lbl">Duration</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">18</div><div class="wo-meta-lbl">Sets</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">5</div><div class="wo-meta-lbl">Exercises</div></div>
+    </div>
+    <div class="video-credit">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.5-.5-5.2a3 3 0 00-2.1-2.1C18.7 4 12 4 12 4s-6.7 0-8.4.7A3 3 0 001.5 6.8C1 8.5 1 12 1 12s0 3.5.5 5.2a3 3 0 002.1 2.1c1.7.7 8.4.7 8.4.7s6.7 0 8.4-.7a3 3 0 002.1-2.1C23 15.5 23 12 23 12zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      <div class="video-credit-txt">Form videos by <b>Jeff Nippard</b> — science-based bodybuilder &amp; powerlifter. Every link goes to one of his technique tutorials. Tap to watch.</div>
+    </div>
+    <div class="ex-list">
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">01</div><div class="ex-info"><div class="ex-name">Barbell Back Squat</div><span class="ex-muscle">Quads · Glutes · Hamstrings · Core</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">4</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">5–8</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">3min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">King of all exercises. Hit depth — hip crease below knee. Chest up, drive through heels. Add 5 lbs per session.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">02</div><div class="ex-info"><div class="ex-name">Romanian Deadlift</div><span class="ex-muscle">Hamstrings · Glutes · Lower Back</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">4</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">8–10</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Hinge at hips, slight knee bend, bar close to body. Feel the hamstring stretch at the bottom. Not a squat.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+romanian+deadlift+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">03</div><div class="ex-info"><div class="ex-name">Leg Press</div><span class="ex-muscle">Quads · Glutes</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">10–15</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Full ROM, never lock knees. High foot placement for glutes, low for quads. Add plates weekly.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+leg+press+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">04</div><div class="ex-info"><div class="ex-name">Walking Lunges</div><span class="ex-muscle">Quads · Glutes · Hip Flexors</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">20 steps</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">90s</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Long stride, knee touches ground softly. Fixes strength imbalances. Push hard through glutes on each step.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+lunge+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">05</div><div class="ex-info"><div class="ex-name">Standing Calf Raises</div><span class="ex-muscle">Gastrocnemius · Soleus</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">4</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">15–20</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">60s</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Full stretch at bottom, full contraction at top. Slow and controlled — no bouncing.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+calf+raise+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRI — Rest -->
+  <div id="day-fri" class="wo-panel">
+    <div class="rest-card">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M8 26c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#555" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M5 26h30" stroke="#555" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rest-title">REST DAY</div>
+      <p class="rest-sub">Friday · Two rest days after legs is intentional. Full recovery before Saturday. Eat, sleep, prep food for the weekend.</p>
+      <div class="rest-chips"><span class="rest-chip">Light stretching</span><span class="rest-chip">Sleep 8+ hrs</span><span class="rest-chip">Meal prep</span><span class="rest-chip">Take creatine</span></div>
+    </div>
+  </div>
+
+  <!-- SAT — Full Body -->
+  <div id="day-sat" class="wo-panel">
+    <div class="wo-hdr">
+      <div class="wo-eye">Saturday · Day 6</div>
+      <div class="wo-title">FULL BODY</div>
+      <div class="wo-chips"><span class="chip primary">Deadlift</span><span class="chip primary">Full Body</span><span class="chip">Accessories</span></div>
+    </div>
+    <div class="wo-meta-row">
+      <div class="wo-meta-cell"><div class="wo-meta-num">80<span style="font-size:14px;color:var(--muted)">min</span></div><div class="wo-meta-lbl">Duration</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">15</div><div class="wo-meta-lbl">Sets</div></div>
+      <div class="wo-meta-cell"><div class="wo-meta-num">5</div><div class="wo-meta-lbl">Exercises</div></div>
+    </div>
+    <div class="video-credit">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.5-.5-5.2a3 3 0 00-2.1-2.1C18.7 4 12 4 12 4s-6.7 0-8.4.7A3 3 0 001.5 6.8C1 8.5 1 12 1 12s0 3.5.5 5.2a3 3 0 002.1 2.1c1.7.7 8.4.7 8.4.7s6.7 0 8.4-.7a3 3 0 002.1-2.1C23 15.5 23 12 23 12zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      <div class="video-credit-txt">Form videos by <b>Jeff Nippard</b> — science-based bodybuilder &amp; powerlifter. Every link goes to one of his technique tutorials. Tap to watch.</div>
+    </div>
+    <div class="ex-list">
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">01</div><div class="ex-info"><div class="ex-name">Conventional Deadlift</div><span class="ex-muscle">Full Body · Back · Glutes · Hamstrings</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">3–5</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">4min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">The total body mass builder. Bar close to body, drive floor away, lock out with glutes. Heaviest lift of the week.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=VL5Ab0T07e4" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">02</div><div class="ex-info"><div class="ex-name">Dumbbell Bench Press</div><span class="ex-muscle">Chest · Shoulders · Triceps</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">8–12</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Variation from Mon. Dumbbells allow greater range and fix imbalances. Pause briefly at the bottom.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+dumbbell+bench+press+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">03</div><div class="ex-info"><div class="ex-name">T-Bar or Cable Row</div><span class="ex-muscle">Mid Back · Lats</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">8–12</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">90s</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Variation from Tuesday's row. Full stretch and contraction every rep. Keeps back strong to support the deadlift.</div>
+        <a class="ex-video" href="https://www.youtube.com/watch?v=DXL18E7QRbk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">04</div><div class="ex-info"><div class="ex-name">Front Squat / Goblet Squat</div><span class="ex-muscle">Quads · Core · Upper Back</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">8–10</div><div class="ex-stat-lbl">Reps</div></div><div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Lighter than back squat. Forces torso upright and hammers quads. Great for addressing back squat weaknesses.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+front+squat+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+      <div class="ex-card">
+        <div class="ex-card-hdr"><div class="ex-n">05</div><div class="ex-info"><div class="ex-name">Farmer's Carry</div><span class="ex-muscle">Traps · Core · Grip · Legs</span></div></div>
+        <div class="ex-stats"><div class="ex-stat"><div class="ex-stat-val">3</div><div class="ex-stat-lbl">Sets</div></div><div class="ex-stat"><div class="ex-stat-val">40m walk</div><div class="ex-stat-lbl">Dist</div></div><div class="ex-stat"><div class="ex-stat-val">2min</div><div class="ex-stat-lbl">Rest</div></div></div>
+        <div class="ex-desc">Heavy dumbbells or plates. Walk 40 meters. Builds grip, traps, and total-body stability. Finish every Saturday session with these.</div>
+        <a class="ex-video" href="https://www.youtube.com/results?search_query=Jeff+Nippard+farmers+carry+technique" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg> Watch form video</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUN — Rest -->
+  <div id="day-sun" class="wo-panel">
+    <div class="rest-card">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="7" stroke="#555" stroke-width="2" fill="none"/><path d="M20 6v4M20 30v4M6 20h4M30 20h4M10.3 10.3l2.8 2.8M26.9 26.9l2.8 2.8M26.9 10.3l-2.8 2.8M10.3 26.9l2.8-2.8" stroke="#555" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rest-title">REST DAY</div>
+      <p class="rest-sub">Sunday · Full recovery. Plan the week. Costco run. Log your weigh-in. Get ready to anchor Monday.</p>
+      <div class="rest-chips"><span class="rest-chip">Costco run</span><span class="rest-chip">Meal prep</span><span class="rest-chip">Log weight</span><span class="rest-chip">Plan Monday</span><span class="rest-chip">Take creatine</span></div>
+    </div>
+  </div>
+
+</div><!-- end workout tab -->
+
+
+<!-- ══════════════════════════════════
+     TAB 3 — MEAL PLANS
+══════════════════════════════════ -->
+<div id="tab-meals" class="tab-panel active">
+
+  <div class="s-hero">
+    <div>
+      <div class="s-eye">Nutrition System</div>
+      <div class="s-title">DAILY<br>MEALS</div>
+      <div class="s-sub">By time, food, and exact amounts.</div>
+    </div>
+    <div>
+      <div class="s-stat-num">3.2k</div>
+      <div class="s-stat-lbl">Cal/Day</div>
+    </div>
+  </div>
+
+  <div class="meal-type-strip">
+    <button class="mtype-btn active" data-mday="train">Training<br>Day</button>
+    <button class="mtype-btn" data-mday="rest">Rest<br>Day</button>
+    <button class="mtype-btn" data-mday="budget">Budget<br>Day</button>
+  </div>
+
+  <!-- ── TRAINING DAY ── -->
+  <div id="mday-train" class="mpanel active">
+    <div class="macro-row">
+      <div class="macro-cell"><div class="macro-num cal">3,180</div><div class="macro-lbl">Cal</div></div>
+      <div class="macro-cell"><div class="macro-num pro">218</div><div class="macro-lbl">Protein</div></div>
+      <div class="macro-cell"><div class="macro-num carb">310</div><div class="macro-lbl">Carbs</div></div>
+      <div class="macro-cell"><div class="macro-num fat">96</div><div class="macro-lbl">Fat</div></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-cell"><div class="prog-lbl">Calories</div><div class="prog-track"><div class="prog-fill cal" style="width:99%"></div></div><div class="prog-vals"><span class="prog-cur">3,180</span><span class="prog-tgt">/ 3,200</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Protein</div><div class="prog-track"><div class="prog-fill pro" style="width:100%"></div></div><div class="prog-vals"><span class="prog-cur">218g</span><span class="prog-tgt">/ 210g ✓</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Carbs</div><div class="prog-track"><div class="prog-fill carb" style="width:97%"></div></div><div class="prog-vals"><span class="prog-cur">310g</span><span class="prog-tgt">/ 320g</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Fat</div><div class="prog-track"><div class="prog-fill fat" style="width:100%"></div></div><div class="prog-vals"><span class="prog-cur">96g</span><span class="prog-tgt">/ 95g ✓</span></div></div>
+    </div>
+    <div class="meal-timeline">
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">6:30</div><div class="meal-ampm">AM</div><div class="meal-period">Wake Up</div></div>
+          <div class="meal-title-block"><div class="meal-name">Wake-Up + Creatine</div><div class="meal-totals"><span class="m-pill cal">450 cal</span><span class="m-pill pro">33g pro</span><span class="m-pill carb">38g carb</span><span class="m-pill fat">16g fat</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Water</div><div class="fi-sub">16 oz — first thing</div></div><div class="fi-nums"><div class="fi-cal">0</div><div class="fi-pro">0g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Creatine Monohydrate</div><div class="fi-sub">5g dissolved in water</div></div><div class="fi-nums"><div class="fi-cal">0</div><div class="fi-pro">0g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Sous Vide Egg Bites</div><div class="fi-sub">1 pack (2 bites)</div></div><div class="fi-nums"><div class="fi-cal">260</div><div class="fi-pro">12g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Protein Bar</div><div class="fi-sub">1 bar (60g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">21g pro</div></div></div>
+        </div>
+        <div class="meal-note">Take creatine every single morning. The protein bar + egg bites gives you 33g protein before your day starts.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">9:00</div><div class="meal-ampm">AM</div><div class="meal-period">Breakfast</div></div>
+          <div class="meal-title-block"><div class="meal-name">High-Protein Breakfast</div><div class="meal-totals"><span class="m-pill cal">580 cal</span><span class="m-pill pro">33g pro</span><span class="m-pill carb">68g carb</span><span class="m-pill fat">18g fat</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Everything Bagel</div><div class="fi-sub">1 bagel (105g)</div></div><div class="fi-nums"><div class="fi-cal">270</div><div class="fi-pro">10g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Peanut Butter (spread)</div><div class="fi-sub">2 tbsp (32g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">8g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Oikos Triple Zero Yogurt</div><div class="fi-sub">1 container (150g) — on the side</div></div><div class="fi-nums"><div class="fi-cal">120</div><div class="fi-pro">15g pro</div></div></div>
+        </div>
+        <div class="meal-note">Bagel + peanut butter is your calorie-dense base. Yogurt on the side adds protein and keeps you full until noon.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">11:30</div><div class="meal-ampm">AM</div><div class="meal-period">Pre-WO</div></div>
+          <div class="meal-title-block"><div class="meal-name">Pre-Workout Fuel</div><div class="meal-totals"><span class="m-pill cal">500 cal</span><span class="m-pill pro">41g pro</span><span class="m-pill carb">56g carb</span><span class="m-pill fat">12g fat</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Everything Bagel</div><div class="fi-sub">1 bagel (105g)</div></div><div class="fi-nums"><div class="fi-cal">270</div><div class="fi-pro">10g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Turkey Breast</div><div class="fi-sub">4 oz (113g)</div></div><div class="fi-nums"><div class="fi-cal">120</div><div class="fi-pro">24g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Sliced Cheddar Cheese</div><div class="fi-sub">1 slice (28g)</div></div><div class="fi-nums"><div class="fi-cal">110</div><div class="fi-pro">7g pro</div></div></div>
+        </div>
+        <div class="meal-note">Eat 60–90 min before training. Bagel gives fast carbs, turkey + cheese gives protein that digests during your session.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">1:00</div><div class="meal-ampm">PM</div><div class="meal-period">During WO</div></div>
+          <div class="meal-title-block"><div class="meal-name">Workout Window</div><div class="meal-totals"><span class="m-pill cal">45 cal</span><span class="m-pill carb">11g carb</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Water</div><div class="fi-sub">32 oz throughout session</div></div><div class="fi-nums"><div class="fi-cal">0</div><div class="fi-pro">0g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Liquid I.V. Packet</div><div class="fi-sub">1 packet dissolved in water</div></div><div class="fi-nums"><div class="fi-cal">45</div><div class="fi-pro">0g pro</div></div></div>
+        </div>
+        <div class="meal-note">Add Liquid I.V. at the 20-min mark or when heavy sweating starts. Never train dehydrated.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">2:30</div><div class="meal-ampm">PM</div><div class="meal-period">Post-WO</div></div>
+          <div class="meal-title-block"><div class="meal-name">Post-Workout Recovery</div><div class="meal-totals"><span class="m-pill cal">720 cal</span><span class="m-pill pro">58g pro</span><span class="m-pill carb">100g carb</span><span class="m-pill fat">10g fat</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Fairlife Nutrition Plan Shake</div><div class="fi-sub">1 bottle (340ml) — within 30 min</div></div><div class="fi-nums"><div class="fi-cal">150</div><div class="fi-pro">30g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Bibigo Cooked Rice Bowl</div><div class="fi-sub">1 bowl (210g)</div></div><div class="fi-nums"><div class="fi-cal">380</div><div class="fi-pro">7g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Protein Bar</div><div class="fi-sub">1 bar (60g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">21g pro</div></div></div>
+        </div>
+        <div class="meal-note">Fairlife shake within 30 min — don't miss this window. Protein bar + rice bowl stacks 58g protein and replenishes glycogen fast.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">5:30</div><div class="meal-ampm">PM</div><div class="meal-period">Afternoon</div></div>
+          <div class="meal-title-block"><div class="meal-name">Afternoon Protein Hit</div><div class="meal-totals"><span class="m-pill cal">320 cal</span><span class="m-pill pro">40g pro</span><span class="m-pill carb">10g carb</span><span class="m-pill fat">12g fat</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Oikos Triple Zero Yogurt</div><div class="fi-sub">1 container (150g)</div></div><div class="fi-nums"><div class="fi-cal">120</div><div class="fi-pro">15g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Turkey Breast</div><div class="fi-sub">3 oz (85g)</div></div><div class="fi-nums"><div class="fi-cal">90</div><div class="fi-pro">18g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Sliced Cheddar Cheese</div><div class="fi-sub">1 slice (28g)</div></div><div class="fi-nums"><div class="fi-cal">110</div><div class="fi-pro">7g pro</div></div></div>
+        </div>
+        <div class="meal-note">Quick bridge snack. Keeps protein synthesis elevated between post-workout and dinner. Zero prep.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">7:30</div><div class="meal-ampm">PM</div><div class="meal-period">Dinner</div></div>
+          <div class="meal-title-block"><div class="meal-name">Main Dinner</div><div class="meal-totals"><span class="m-pill cal">920 cal</span><span class="m-pill pro">49g pro</span><span class="m-pill carb">84g carb</span><span class="m-pill fat">26g fat</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Sirloin Burger Patty</div><div class="fi-sub">1 patty (170g)</div></div><div class="fi-nums"><div class="fi-cal">350</div><div class="fi-pro">28g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Everything Bagel (as bun)</div><div class="fi-sub">1 bagel</div></div><div class="fi-nums"><div class="fi-cal">270</div><div class="fi-pro">10g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Sliced Cheddar Cheese</div><div class="fi-sub">1 slice (28g) — melted on patty</div></div><div class="fi-nums"><div class="fi-cal">110</div><div class="fi-pro">7g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Bibigo Rice Bowl (side)</div><div class="fi-sub">½ bowl (105g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">4g pro</div></div></div>
+        </div>
+        <div class="meal-note">Biggest meal. Sirloin patty + bagel bun is your caloric anchor. Don't skip the rice — you need carbs for overnight recovery.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">10:00</div><div class="meal-ampm">PM</div><div class="meal-period">Pre-Bed</div></div>
+          <div class="meal-title-block"><div class="meal-name">Pre-Bed Recovery</div><div class="meal-totals"><span class="m-pill cal">245 cal</span><span class="m-pill pro">34g pro</span><span class="m-pill carb">10g carb</span><span class="m-pill fat">9g fat</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Fairlife Nutrition Plan Shake</div><div class="fi-sub">1 bottle</div></div><div class="fi-nums"><div class="fi-cal">150</div><div class="fi-pro">30g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Peanut Butter</div><div class="fi-sub">1 tbsp (16g)</div></div><div class="fi-nums"><div class="fi-cal">95</div><div class="fi-pro">4g pro</div></div></div>
+        </div>
+        <div class="meal-note">Fairlife contains casein — digests over 6–8 hours of sleep. Feeds muscle repair all night. Never skip this.</div>
+      </div>
+
+    </div>
+  </div><!-- end training day -->
+
+  <!-- ── REST DAY ── -->
+  <div id="mday-rest" class="mpanel">
+    <div class="macro-row">
+      <div class="macro-cell"><div class="macro-num cal">2,650</div><div class="macro-lbl">Cal</div></div>
+      <div class="macro-cell"><div class="macro-num pro">205</div><div class="macro-lbl">Protein</div></div>
+      <div class="macro-cell"><div class="macro-num carb">245</div><div class="macro-lbl">Carbs</div></div>
+      <div class="macro-cell"><div class="macro-num fat">90</div><div class="macro-lbl">Fat</div></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-cell"><div class="prog-lbl">Calories vs Training</div><div class="prog-track"><div class="prog-fill cal" style="width:83%"></div></div><div class="prog-vals"><span class="prog-cur">2,650</span><span class="prog-tgt">Train: 3,180</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Protein vs Training</div><div class="prog-track"><div class="prog-fill pro" style="width:94%"></div></div><div class="prog-vals"><span class="prog-cur">205g</span><span class="prog-tgt">Train: 218g</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Carbs — reduced</div><div class="prog-track"><div class="prog-fill carb" style="width:79%"></div></div><div class="prog-vals"><span class="prog-cur">245g</span><span class="prog-tgt">Train: 310g</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Fat — same</div><div class="prog-track"><div class="prog-fill fat" style="width:94%"></div></div><div class="prog-vals"><span class="prog-cur">90g</span><span class="prog-tgt">Train: 96g</span></div></div>
+    </div>
+    <div class="meal-timeline">
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">7:00</div><div class="meal-ampm">AM</div><div class="meal-period">Wake Up</div></div>
+          <div class="meal-title-block"><div class="meal-name">Morning Stack</div><div class="meal-totals"><span class="m-pill cal">450 cal</span><span class="m-pill pro">33g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Water + Creatine (5g)</div><div class="fi-sub">16 oz — first thing</div></div><div class="fi-nums"><div class="fi-cal">0</div><div class="fi-pro">0g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Egg Bites</div><div class="fi-sub">1 pack (2 bites)</div></div><div class="fi-nums"><div class="fi-cal">260</div><div class="fi-pro">12g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Protein Bar</div><div class="fi-sub">1 bar (60g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">21g pro</div></div></div>
+        </div>
+        <div class="meal-note">Same morning stack as training day. Creatine daily regardless of whether you train.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">10:00</div><div class="meal-ampm">AM</div><div class="meal-period">Breakfast</div></div>
+          <div class="meal-title-block"><div class="meal-name">Bagel + PB Breakfast</div><div class="meal-totals"><span class="m-pill cal">580 cal</span><span class="m-pill pro">33g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Everything Bagel</div><div class="fi-sub">1 bagel (105g)</div></div><div class="fi-nums"><div class="fi-cal">270</div><div class="fi-pro">10g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Peanut Butter (spread)</div><div class="fi-sub">2 tbsp (32g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">8g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Oikos Triple Zero Yogurt</div><div class="fi-sub">1 container (150g)</div></div><div class="fi-nums"><div class="fi-cal">120</div><div class="fi-pro">15g pro</div></div></div>
+        </div>
+        <div class="meal-note">Same base as training day — habit consistency removes decision fatigue. Protein stays high on rest days.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">1:00</div><div class="meal-ampm">PM</div><div class="meal-period">Lunch</div></div>
+          <div class="meal-title-block"><div class="meal-name">Turkey Sandwich</div><div class="meal-totals"><span class="m-pill cal">530 cal</span><span class="m-pill pro">47g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Everything Bagel</div><div class="fi-sub">1 bagel (105g)</div></div><div class="fi-nums"><div class="fi-cal">270</div><div class="fi-pro">10g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Turkey Breast</div><div class="fi-sub">5 oz (142g)</div></div><div class="fi-nums"><div class="fi-cal">150</div><div class="fi-pro">30g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Sliced Cheddar Cheese</div><div class="fi-sub">1 slice (28g)</div></div><div class="fi-nums"><div class="fi-cal">110</div><div class="fi-pro">7g pro</div></div></div>
+        </div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">4:00</div><div class="meal-ampm">PM</div><div class="meal-period">Snack</div></div>
+          <div class="meal-title-block"><div class="meal-name">Shake Snack</div><div class="meal-totals"><span class="m-pill cal">245 cal</span><span class="m-pill pro">34g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Fairlife Nutrition Plan Shake</div><div class="fi-sub">1 bottle</div></div><div class="fi-nums"><div class="fi-cal">150</div><div class="fi-pro">30g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Peanut Butter</div><div class="fi-sub">1 tbsp (16g)</div></div><div class="fi-nums"><div class="fi-cal">95</div><div class="fi-pro">4g pro</div></div></div>
+        </div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">7:00</div><div class="meal-ampm">PM</div><div class="meal-period">Dinner</div></div>
+          <div class="meal-title-block"><div class="meal-name">Chicken &amp; Rice Dinner</div><div class="meal-totals"><span class="m-pill cal">640 cal</span><span class="m-pill pro">46g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Chicken Chunks</div><div class="fi-sub">6 oz (170g)</div></div><div class="fi-nums"><div class="fi-cal">260</div><div class="fi-pro">39g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Bibigo Rice Bowl</div><div class="fi-sub">1 bowl (210g)</div></div><div class="fi-nums"><div class="fi-cal">380</div><div class="fi-pro">7g pro</div></div></div>
+        </div>
+        <div class="meal-note">Rest day dinner drops slightly vs training. One rice bowl instead of rice + bagel. Protein stays strong.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">10:00</div><div class="meal-ampm">PM</div><div class="meal-period">Pre-Bed</div></div>
+          <div class="meal-title-block"><div class="meal-name">Pre-Bed Casein</div><div class="meal-totals"><span class="m-pill cal">215 cal</span><span class="m-pill pro">19g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Oikos Triple Zero Yogurt</div><div class="fi-sub">1 container (150g)</div></div><div class="fi-nums"><div class="fi-cal">120</div><div class="fi-pro">15g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Peanut Butter</div><div class="fi-sub">1 tbsp (16g)</div></div><div class="fi-nums"><div class="fi-cal">95</div><div class="fi-pro">4g pro</div></div></div>
+        </div>
+        <div class="meal-note">Casein from yogurt digests slowly overnight. Peanut butter fats slow absorption further — steady amino acid release while you sleep.</div>
+      </div>
+
+    </div>
+  </div><!-- end rest day -->
+
+  <!-- ── BUDGET DAY ── -->
+  <div id="mday-budget" class="mpanel">
+    <div class="macro-row">
+      <div class="macro-cell"><div class="macro-num cal">2,850</div><div class="macro-lbl">Cal</div></div>
+      <div class="macro-cell"><div class="macro-num pro">210</div><div class="macro-lbl">Protein</div></div>
+      <div class="macro-cell"><div class="macro-num carb">262</div><div class="macro-lbl">Carbs</div></div>
+      <div class="macro-cell"><div class="macro-num fat">88</div><div class="macro-lbl">Fat</div></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-cell"><div class="prog-lbl">Calories</div><div class="prog-track"><div class="prog-fill cal" style="width:89%"></div></div><div class="prog-vals"><span class="prog-cur">2,850</span><span class="prog-tgt">Train: 3,180</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Protein</div><div class="prog-track"><div class="prog-fill pro" style="width:96%"></div></div><div class="prog-vals"><span class="prog-cur">210g</span><span class="prog-tgt">Train: 218g</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Carbs</div><div class="prog-track"><div class="prog-fill carb" style="width:85%"></div></div><div class="prog-vals"><span class="prog-cur">262g</span><span class="prog-tgt">Train: 310g</span></div></div>
+      <div class="prog-cell"><div class="prog-lbl">Fat</div><div class="prog-track"><div class="prog-fill fat" style="width:92%"></div></div><div class="prog-vals"><span class="prog-cur">88g</span><span class="prog-tgt">Train: 96g</span></div></div>
+    </div>
+    <div class="meal-timeline">
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">7:00</div><div class="meal-ampm">AM</div><div class="meal-period">Wake Up</div></div>
+          <div class="meal-title-block"><div class="meal-name">Protein Bar Wake-Up</div><div class="meal-totals"><span class="m-pill cal">310 cal</span><span class="m-pill pro">36g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Water + Creatine (5g)</div><div class="fi-sub">16 oz</div></div><div class="fi-nums"><div class="fi-cal">0</div><div class="fi-pro">0g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Protein Bar</div><div class="fi-sub">1 bar (60g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">21g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Oikos Triple Zero Yogurt</div><div class="fi-sub">1 container (150g)</div></div><div class="fi-nums"><div class="fi-cal">120</div><div class="fi-pro">15g pro</div></div></div>
+        </div>
+        <div class="meal-note">Zero prep. Grab the bar, open the yogurt, mix creatine into water. 36g protein in 2 minutes flat.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">10:30</div><div class="meal-ampm">AM</div><div class="meal-period">Mid Morning</div></div>
+          <div class="meal-title-block"><div class="meal-name">Turkey + Bagel Stack</div><div class="meal-totals"><span class="m-pill cal">735 cal</span><span class="m-pill pro">58g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Everything Bagel</div><div class="fi-sub">1 bagel (105g)</div></div><div class="fi-nums"><div class="fi-cal">270</div><div class="fi-pro">10g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Turkey Breast</div><div class="fi-sub">5 oz (142g)</div></div><div class="fi-nums"><div class="fi-cal">150</div><div class="fi-pro">30g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Sliced Cheddar Cheese</div><div class="fi-sub">2 slices (56g)</div></div><div class="fi-nums"><div class="fi-cal">220</div><div class="fi-pro">14g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Peanut Butter (side)</div><div class="fi-sub">1 tbsp (16g)</div></div><div class="fi-nums"><div class="fi-cal">95</div><div class="fi-pro">4g pro</div></div></div>
+        </div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">1:30</div><div class="meal-ampm">PM</div><div class="meal-period">Lunch</div></div>
+          <div class="meal-title-block"><div class="meal-name">Bar + Shake Combo</div><div class="meal-totals"><span class="m-pill cal">340 cal</span><span class="m-pill pro">51g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Fairlife Nutrition Plan Shake</div><div class="fi-sub">1 bottle (340ml)</div></div><div class="fi-nums"><div class="fi-cal">150</div><div class="fi-pro">30g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Protein Bar</div><div class="fi-sub">1 bar (60g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">21g pro</div></div></div>
+        </div>
+        <div class="meal-note">51g protein, zero dishes, 90 seconds. On your busiest days this is your most powerful lunch. Keep bars in your bag.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">5:00</div><div class="meal-ampm">PM</div><div class="meal-period">Afternoon</div></div>
+          <div class="meal-title-block"><div class="meal-name">Egg Bites + Yogurt</div><div class="meal-totals"><span class="m-pill cal">380 cal</span><span class="m-pill pro">27g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Sous Vide Egg Bites</div><div class="fi-sub">1 pack (2 bites)</div></div><div class="fi-nums"><div class="fi-cal">260</div><div class="fi-pro">12g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Oikos Triple Zero Yogurt</div><div class="fi-sub">1 container (150g)</div></div><div class="fi-nums"><div class="fi-cal">120</div><div class="fi-pro">15g pro</div></div></div>
+        </div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">7:30</div><div class="meal-ampm">PM</div><div class="meal-period">Dinner</div></div>
+          <div class="meal-title-block"><div class="meal-name">Chicken Rice &amp; Cheese</div><div class="meal-totals"><span class="m-pill cal">836 cal</span><span class="m-pill pro">66g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Kirkland Chicken Chunks</div><div class="fi-sub">8 oz (227g)</div></div><div class="fi-nums"><div class="fi-cal">346</div><div class="fi-pro">52g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Bibigo Rice Bowl</div><div class="fi-sub">1 bowl (210g)</div></div><div class="fi-nums"><div class="fi-cal">380</div><div class="fi-pro">7g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Sliced Cheddar (melted on top)</div><div class="fi-sub">1 slice (28g)</div></div><div class="fi-nums"><div class="fi-cal">110</div><div class="fi-pro">7g pro</div></div></div>
+        </div>
+        <div class="meal-note">Melt the cheese over everything. 66g protein in one bowl. Budget day dinner actually hits harder than most training day meals.</div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-block-hdr">
+          <div class="meal-time-block"><div class="meal-time">10:00</div><div class="meal-ampm">PM</div><div class="meal-period">Pre-Bed</div></div>
+          <div class="meal-title-block"><div class="meal-name">Pre-Bed PB Shake</div><div class="meal-totals"><span class="m-pill cal">340 cal</span><span class="m-pill pro">38g pro</span></div></div>
+        </div>
+        <div class="fi-list">
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Fairlife Nutrition Plan Shake</div><div class="fi-sub">1 bottle</div></div><div class="fi-nums"><div class="fi-cal">150</div><div class="fi-pro">30g pro</div></div></div>
+          <div class="fi-row"><div class="fi-dot"></div><div class="fi-body"><div class="fi-name">Peanut Butter</div><div class="fi-sub">2 tbsp (32g)</div></div><div class="fi-nums"><div class="fi-cal">190</div><div class="fi-pro">8g pro</div></div></div>
+        </div>
+        <div class="meal-note">38g protein while you sleep. Never skip this. It's the easiest 38g of protein in the plan — open, drink, done.</div>
+      </div>
+
+    </div>
+  </div><!-- end budget day -->
+
+</div><!-- end meals tab -->
+
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-tab="meals">
+    <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
+    <div class="nav-label">Meals</div>
+  </button>
+  <button class="nav-btn" data-tab="workout">
+    <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><path d="M6 4v16M18 4v16M3 8h3M18 8h3M3 16h3M18 16h3M6 12h12"/></svg></div>
+    <div class="nav-label">Workout</div>
+  </button>
+  <button class="nav-btn" data-tab="grocery">
+    <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+    <div class="nav-label">Grocery</div>
+  </button>
+</nav>
+
+<script>
+// ── TAB SWITCHING (bottom nav) ──
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+// ── WORKOUT DAY SWITCHING ──
+document.querySelectorAll('.day-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.wo-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('day-' + btn.dataset.day).classList.add('active');
+    // scroll the clicked day into center view
+    btn.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  });
+});
+
+// ── MEAL TYPE SWITCHING ──
+document.querySelectorAll('.mtype-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mtype-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.mpanel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('mday-' + btn.dataset.mday).classList.add('active');
+  });
+});
+
+// ── GROCERY CHECKBOX ──
+function toggleG(item){ item.classList.toggle('checked'); }
+</script>
+</body>
+</html>
